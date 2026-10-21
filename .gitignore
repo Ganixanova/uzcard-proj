@@ -1,0 +1,9 @@
+
+# Ignore all CSV and PNG files
+*.csv
+*.png
+
+# Ignore Claude configuration and virtual environment
+.claude/
+.venv/
+

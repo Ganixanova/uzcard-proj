@@ -1,0 +1,135 @@
+﻿====================================================================================================
+scoring_applications.csv
+rows~=18000, cols=11
+['application_id', 'client_id', 'decision_date', 'channel', 'purpose', 'requested_amount_uzs', 'term_months', 'declared_income_uzs', 'employment_months', 'final_decision', 'approved_by_old_policy']
+   application_id  client_id decision_date     channel    purpose  requested_amount_uzs  term_months  declared_income_uzs  employment_months final_decision  approved_by_old_policy
+0               1        529    2024-08-27  mobile_app  education              20800000           18              6310000              204.0       approved                    True
+1               2        920    2023-10-19      branch  education              15300000           12             11120000                0.0       approved                    True
+2               3       7509    2023-07-01      branch  education               3900000           12              4140000               92.0       approved                    True
+====================================================================================================
+scoring_applications_full.csv
+rows~=11277, cols=10
+['application_id', 'client_id', 'decision_date', 'requested_amount_uzs', 'term_months', 'declared_income_uzs', 'bureau_score_latest', 'dpd_max', 'collection_calls_cnt', 'contract_status_now']
+   application_id  client_id decision_date  requested_amount_uzs  term_months  declared_income_uzs  bureau_score_latest  dpd_max  collection_calls_cnt contract_status_now
+0               1        529    2024-08-27              20800000           18              6310000                611.0        7                     0              active
+1               2        920    2023-10-19              15300000           12             11120000                670.0       12                     0              closed
+2               3       7509    2023-07-01               3900000           12              4140000                681.0        7                     0              closed
+====================================================================================================
+scoring_bureau_inquiries.csv
+rows~=31383, cols=5
+['inquiry_id', 'client_id', 'inquiry_date', 'creditor_name', 'inquiry_type']
+   inquiry_id  client_id inquiry_date creditor_name inquiry_type
+0           1          1   2025-05-20       Bank-09         auto
+1           2          1   2024-10-05       Bank-02         auto
+2           3          1   2024-10-04       Bank-06    microloan
+====================================================================================================
+scoring_bureau_loans.csv
+rows~=34684, cols=12
+['bureau_loan_id', 'client_id', 'creditor_name', 'open_date', 'planned_close_date', 'close_date', 'loan_amount_uzs', 'monthly_payment_uzs', 'outstanding_uzs', 'status', 'current_dpd_bucket', 'worst_dpd_ever']
+   bureau_loan_id  client_id creditor_name   open_date planned_close_date  close_date  loan_amount_uzs  monthly_payment_uzs  outstanding_uzs  status current_dpd_bucket  worst_dpd_ever
+0               1          1       Bank-16  2024-08-30         2026-02-21         NaN         20722924              1665084         13752344  active                  0              12
+1               2          1       Bank-14  2024-02-26         2027-02-10         NaN         24493526               865689         16225046  active              61-90              85
+2               3          1       Bank-04  2023-01-12         2025-12-27         NaN         15849769              1890547         13622610  active                  0               0
+====================================================================================================
+scoring_bureau_snapshots.csv
+rows~=86161, cols=5
+['client_id', 'snapshot_date', 'bureau_score', 'existing_debt_uzs', 'active_loans_cnt']
+   client_id snapshot_date  bureau_score  existing_debt_uzs  active_loans_cnt
+0          1    2023-03-20           637           12000000                 1
+1          1    2023-06-26           641           12000000                 3
+2          1    2023-09-18           637           10000000                 2
+====================================================================================================
+scoring_card_disputes.csv
+rows~=2467, cols=6
+['dispute_id', 'txn_id', 'opened_date', 'reason_code', 'dispute_amount_uzs', 'status']
+   dispute_id  txn_id opened_date   reason_code  dispute_amount_uzs             status
+0           1    1764  2023-10-10  not_received              897691    resolved_client
+1           2    2090  2023-10-29  not_received              167046  resolved_merchant
+2           3    2453  2024-02-15     duplicate              692537  resolved_merchant
+====================================================================================================
+scoring_card_transactions.csv
+rows~=1044743, cols=9
+['txn_id', 'card_id', 'client_id', 'txn_ts', 'txn_type', 'mcc_group', 'amount_uzs', 'status', 'decline_reason']
+   txn_id  card_id  client_id               txn_ts   txn_type  mcc_group  amount_uzs    status  decline_reason
+0  651275     7880       4990  2024-08-09 08:01:00   purchase    grocery      432517  approved             NaN
+1  651276     7879       4990  2024-08-02 08:59:00   purchase  utilities     4357336  approved             NaN
+2  651277     7878       4990  2024-08-05 10:00:00  salary_in     income    16602549  approved             NaN
+====================================================================================================
+scoring_cards.csv
+rows~=12614, cols=8
+['card_id', 'customer_id', 'card_type', 'scheme', 'issue_date', 'expiry_date', 'status', 'credit_limit_uzs']
+   card_id  customer_id card_type  scheme  issue_date expiry_date  status  credit_limit_uzs
+0        1            1     debit  Uzcard  2024-12-11  2028-12-11  active               NaN
+1        2            1     debit    Visa  2020-11-10  2024-11-10  active               NaN
+2        3            1     debit    Humo  2024-03-22  2028-03-22  active               NaN
+====================================================================================================
+scoring_clients_old.csv
+rows~=6000, cols=6
+['client_id', 'full_name', 'birthdate', 'oblast', 'segment_2022', 'income_band_old']
+   client_id           full_name   birthdate          oblast segment_2022 income_band_old
+0          1  Madina Toshpulatov  1991-06-28        Tashkent         mass            3-6M
+1          2     Rustam Berdiyev  1991-06-08  Karakalpakstan      payroll           6-10M
+2          3        Timur Olimov  1969-08-02     Kashkadarya         mass          10-20M
+====================================================================================================
+scoring_collection_actions.csv
+rows~=9135, cols=4
+['contract_id', 'action_date', 'action_type', 'contact_result']
+   contract_id action_date action_type      contact_result
+0            4  2024-11-20         sms  paid_after_contact
+1           11  2025-02-01         sms         unreachable
+2           11  2025-02-14        call      promise_to_pay
+====================================================================================================
+scoring_contracts.csv
+rows~=11277, cols=8
+['contract_id', 'application_id', 'client_id', 'issue_date', 'issued_amount_uzs', 'term_months', 'annual_rate_pct', 'monthly_payment_uzs']
+   contract_id  application_id  client_id  issue_date  issued_amount_uzs  term_months  annual_rate_pct  monthly_payment_uzs
+0            1               1        529  2024-08-30           17600000           18             24.2              1175677
+1            2               2        920  2023-10-21           11400000           12             33.6              1131637
+2            3               3       7509  2023-07-02            3200000           12             35.0               319881
+====================================================================================================
+scoring_customers.csv
+rows~=8000, cols=8
+['customer_id', 'full_name', 'birth_date', 'gender', 'region', 'customer_segment', 'onboarding_date', 'income_band']
+   customer_id           full_name  birth_date gender          region customer_segment onboarding_date income_band
+0            1  Madina Toshpulatov  1991-06-28      M        Tashkent             mass      2018-02-24        3-6M
+1            2     Rustam Berdiyev  1991-06-08      M  Karakalpakstan          payroll      2021-09-15       6-10M
+2            3        Timur Olimov  1969-08-02      M     Kashkadarya             mass      2018-09-29      10-20M
+====================================================================================================
+scoring_model_v1_scores.csv
+rows~=18000, cols=3
+['application_id', 'score_v1', 'decision_recommend']
+   application_id  score_v1 decision_recommend
+0               1       744            approve
+1               2       887            approve
+2               3       876            approve
+====================================================================================================
+scoring_payments.csv
+rows~=103150, cols=7
+['payment_id', 'contract_id', 'installment_no', 'due_date', 'due_amount_uzs', 'paid_date', 'paid_amount_uzs']
+   payment_id  contract_id  installment_no    due_date  due_amount_uzs   paid_date  paid_amount_uzs
+0           1            1               1  2024-09-29         1175677  2024-10-01        1175677.0
+1           2            1               2  2024-10-29         1175677  2024-10-30        1175677.0
+2           3            1               3  2024-11-28         1175677  2024-11-29        1175677.0
+====================================================================================================
+scoring_payments_backup.csv
+rows~=73421, cols=7
+['payment_id', 'contract_id', 'installment_no', 'due_date', 'due_amount_uzs', 'paid_date', 'paid_amount_uzs']
+   payment_id  contract_id  installment_no    due_date  due_amount_uzs   paid_date  paid_amount_uzs
+0           1            1               1  2024-09-29         1175677  2024-10-01        1175677.0
+1           2            1               2  2024-10-29         1175677  2024-10-30        1175677.0
+2           3            1               3  2024-11-28         1175677  2024-11-29        1175677.0
+====================================================================================================
+scoring_temp.csv
+rows~=0, cols=3
+['id', 'val', 'note']
+Empty DataFrame
+Columns: [id, val, note]
+Index: []
+====================================================================================================
+scoring_txn_sample.csv
+rows~=5000, cols=11
+['transaction_id', 'card_id', 'merchant_id', 'terminal_id', 'txn_ts', 'amount_uzs', 'txn_status', 'decline_reason', 'is_recurring', 'entry_mode', 'is_disputed']
+   transaction_id  card_id  merchant_id  terminal_id               txn_ts  amount_uzs txn_status  decline_reason  is_recurring   entry_mode  is_disputed
+0           57729     1284          232          815  2023-09-01 10:17:00       65800   approved             NaN         False  contactless        False
+1           50355     2744          438         1542  2023-12-22 10:25:00       25800   approved             NaN         False     ecom_cvv        False
+2            5259      246          351         1247  2023-11-04 06:08:00       79000   approved             NaN         False  contactless        False

@@ -1,0 +1,36 @@
+﻿rows: 103150
+paid_date null share: 0.12123121667474551
+
+Among paid rows:
+paid_amount < due_amount (partial payment) share: 0.0
+paid_amount > due_amount (overpaid) share: 0.0
+of partial/over, max abs relative diff: 0.0 share with diff>1%: 0.0
+
+dpd stats (paid rows):
+count    90645.000000
+mean         1.954052
+std          5.743857
+min          0.000000
+25%          0.000000
+50%          1.000000
+75%          2.000000
+max         75.000000
+Name: dpd, dtype: float64
+share paid EARLY (dpd<0): 0.0
+min dpd: 0 max dpd: 75
+
+any duplicate (contract_id, installment_no)? 0
+
+contracts with zero payment rows: 39
+contracts with non-contiguous installment_no starting at 1: 0
+
+zero-payment contracts issue_date range: 2025-05-02 00:00:00 2025-05-05 00:00:00
+months since issue for these: count    39.000000
+mean      0.913946
+std       0.031861
+min       0.854139
+25%       0.886991
+50%       0.919842
+75%       0.952694
+max       0.952694
+Name: issue_date, dtype: float64

@@ -1,0 +1,53 @@
+﻿
+====================================================================================================
+A) exact overlap counts between id spaces
+apps.client_id total unique: 11328 max: 32000
+overlap apps & customers: 5891
+overlap apps & clients_old: 4417
+overlap apps & card_transactions: 4164
+overlap apps & bureau_snapshots: 8062
+customers & bureau_snapshots overlap: 8000
+customers & card_transactions overlap: 5674
+
+====================================================================================================
+B) is apps.client_id range actually disjoint-ish from customers id range or just numeric coincidence?
+apps client_id describe:
+ count    18000.000000
+mean     12715.672611
+std      11133.294226
+min          1.000000
+25%       3302.000000
+50%       6612.000000
+75%      24398.250000
+max      32000.000000
+Name: client_id, dtype: float64
+how many apps.client_id <= 8000 (customers max): 10863
+of those, how many ARE in customers ids: 10863 / 10863
+
+====================================================================================================
+C) applications_full.bureau_score_latest vs as-of(decision_date) snapshot score - is it leaking future?
+rows: 11277 have as-of snapshot: 8936
+match rate (latest == as-of decision): 0.11190919570807839
+match rate (latest == truly latest snapshot overall incl future): 0.8257515296621442
+
+====================================================================================================
+D) cards.customer_id vs customers full coverage
+cards.customer_id nunique: 8000 customers n: 8000
+every customer has >=1 card? True
+
+====================================================================================================
+E) employment_months anomalies
+negative values: 0
+value counts of extreme (>=240): 61
+employment_months
+231.0    73
+232.0    75
+233.0    73
+234.0    71
+235.0    70
+236.0    64
+237.0    76
+238.0    66
+239.0    72
+240.0    61
+Name: count, dtype: int64

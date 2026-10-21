@@ -1,0 +1,148 @@
+﻿
+====================================================================================================
+1) applications: final_decision counts
+final_decision
+approved    11277
+rejected     6723
+Name: count, dtype: int64
+decision_date range: 2023-06-01 00:00:00 2025-04-30 00:00:00
+
+====================================================================================================
+2) applications_full vs contracts: application_id sets equal?
+apps_full ids == contracts.application_id ids: True
+apps_full n: 11277 contracts n: 11277
+apps_full ids subset of approved apps: True
+
+====================================================================================================
+3) applications_full extra columns look post-decision?
+['application_id', 'client_id', 'decision_date', 'requested_amount_uzs', 'term_months', 'declared_income_uzs', 'bureau_score_latest', 'dpd_max', 'collection_calls_cnt', 'contract_status_now']
+        bureau_score_latest       dpd_max  collection_calls_cnt contract_status_now
+count           9312.000000  11277.000000          11277.000000               11277
+unique                  NaN           NaN                   NaN                   5
+top                     NaN           NaN                   NaN              active
+freq                    NaN           NaN                   NaN                4665
+mean             650.385954     49.324820              0.810056                 NaN
+std              113.060681    120.002672              1.906402                 NaN
+min              300.000000      0.000000              0.000000                 NaN
+25%              590.000000      4.000000              0.000000                 NaN
+50%              656.000000      7.000000              0.000000                 NaN
+75%              725.000000     12.000000              0.000000                 NaN
+max              900.000000    699.000000              6.000000                 NaN
+
+====================================================================================================
+4) customers vs clients_old: same person universe?
+customers n: 8000 clients_old n: 6000
+matched by id: 6000
+name match rate: 1.0
+id ranges -> customers: 1 8000  clients_old: 1 6000
+customers cols: ['customer_id', 'full_name', 'birth_date', 'gender', 'region', 'customer_segment', 'onboarding_date', 'income_band']
+clients_old cols: ['client_id', 'full_name', 'birthdate', 'oblast', 'segment_2022', 'income_band_old']
+
+====================================================================================================
+5) client_id universe in applications vs customers/clients_old
+apps client_id range: 1 32000 nunique: 11328
+client_id subset of customers.customer_id: False
+client_id subset of clients_old.client_id: False
+
+====================================================================================================
+6) cards.customer_id vs customers/clients_old universe
+cards.customer_id subset of customers: True
+cards.customer_id subset of clients_old: False
+
+====================================================================================================
+7) payments vs payments_backup: identical rows?
+payments shape: (103150, 7) backup shape: (73421, 7)
+common payment_id count: 71276
+identical on common ids: False
+max payment_id payments: 103150 backup: 103144
+payments due_date range: 2023-07-02 00:00:00 2025-05-31 00:00:00
+backup due_date range: 2023-07-02 00:00:00 2024-12-31 00:00:00
+
+====================================================================================================
+8) open contracts: observation window not closed as of 2025-05-31
+contracts with last_due_date > extract_date (future installments still owed): 0 / 11277
+contracts issued within last 12m (window likely open): 5420 / 11277
+
+====================================================================================================
+9) payments: unpaid / missing paid_date as of extract date, only for due_date already passed
+is_unpaid      False  True 
+is_due_passed              
+True           90645  12505
+
+====================================================================================================
+10) bureau_snapshots: per-client snapshot count & date range vs applications decision_date
+                                 min                            max         count
+count                          12805                          12805  12805.000000
+mean   2023-06-10 22:36:40.203045632  2024-11-07 12:47:37.508785664      6.728700
+min              2023-01-01 00:00:00            2023-06-01 00:00:00      1.000000
+25%              2023-02-02 00:00:00            2024-04-25 00:00:00      2.000000
+50%              2023-03-06 00:00:00            2025-03-22 00:00:00     10.000000
+75%              2023-10-19 00:00:00            2025-04-27 00:00:00     10.000000
+max              2024-08-01 00:00:00            2025-05-31 00:00:00     11.000000
+std                              NaN                            NaN      4.065474
+apps with NO bureau snapshot at all: 4294
+apps with >=1 snapshot before/at decision_date: 12853 / 18000
+
+====================================================================================================
+11) bureau_loans: open_date relative to decision_date (future loans opened after our decision)
+bureau loans opened AFTER our decision_date (must exclude for as-of features): 14490 / 39274
+
+====================================================================================================
+12) model_v1_scores vs approved_by_old_policy correlation (selection bias signal)
+                          count        mean         std    min    25%    50%    75%    max
+approved_by_old_policy                                                                    
+False                    6473.0  449.119265  104.819084  300.0  377.0  428.0  497.0  898.0
+True                    11527.0  719.481305  176.728120  300.0  585.0  790.0  872.0  899.0
+                  count        mean         std    min    25%    50%    75%    max
+final_decision                                                                    
+approved        11277.0  710.325619  181.413699  300.0  553.0  781.0  871.0  899.0
+rejected         6723.0  474.530418  138.428764  300.0  381.0  436.0  521.0  899.0
+
+====================================================================================================
+13) card_transactions client_id universe vs applications client_id universe
+txn client_id nunique: 5674
+overlap with apps.client_id: 4164 / 11328
+txn_type values: txn_type
+purchase     641790
+cash_out     113108
+p2p_out      109992
+salary_in    106662
+p2p_in        73191
+Name: count, dtype: int64
+txn_ts range: 2023-01-01 07:01:00 2025-05-28 23:59:00
+
+====================================================================================================
+14) txn_sample vs card_transactions: overlapping keys?
+txn_sample cols: ['transaction_id', 'card_id', 'merchant_id', 'terminal_id', 'txn_ts', 'amount_uzs', 'txn_status', 'decline_reason', 'is_recurring', 'entry_mode', 'is_disputed']
+card_id overlap: 1742
+txn_sample has client_id? False
+txn_sample txn_ts range: 2023-01-01 14:01:00 2023-12-28 22:54:00
+txn.txn_id range: 1 1044743
+txn_sample.transaction_id range: 13 60309
+
+====================================================================================================
+15) collection_actions contract_id linkage
+contract_id subset of contracts: True
+collections action_date vs contract issue_date -> always after issue?
+1.0
+
+====================================================================================================
+16) nulls in declared_income / employment_months / other anketa fields
+requested_amount_uzs    0.000000
+declared_income_uzs     0.000000
+employment_months       0.077889
+dtype: float64
+count    16598.000000
+mean       120.553199
+std         69.466387
+min          0.000000
+25%         60.000000
+50%        121.000000
+75%        181.000000
+max        240.000000
+Name: employment_months, dtype: float64
+employment_months==0 share: 0.0035
+
+====================================================================================================
+17) declined applications - do they have contracts/payments (should NOT)?
+declined with contract anyway: 0
